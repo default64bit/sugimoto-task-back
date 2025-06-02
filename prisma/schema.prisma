@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -42,7 +41,7 @@ model ProductImages {
 
 model ProductOptions {
   id       String                @id @default(cuid())
-  name     String
+  name     String                @db.VarChar(255)
   desc     String?               @db.Text
   options  ProductOptionValues[]
   products Products[]            @relation("ProductOptions") // many-to-many
@@ -65,9 +64,10 @@ model ProductOptionValues {
 }
 
 model ProductReviews {
-  id         String @id @default(cuid())
-  reviewText String @db.Text
-  rating     Int
+  id         String  @id @default(cuid())
+  user       String? @db.VarChar(255)
+  reviewText String  @db.Text
+  rating     Int // 1 - 5
 
   productId String
   product   Products @relation(fields: [productId], references: [id])
