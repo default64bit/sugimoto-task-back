@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumberString, IsString, Length, Max, Min } from 'class-validator';
+import { IsNotEmpty, IsNumberString, IsString, Length, Max, Min } from "class-validator";
 
 export class CreateReviewDTO {
   @Length(1, 200)

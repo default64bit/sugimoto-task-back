@@ -1,6 +1,6 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma.service';
-import { WithPaginationServiceParams } from 'src/interfaces/query.interfaces';
+import { Injectable, UnprocessableEntityException } from "@nestjs/common";
+import { PrismaService } from "src/database/prisma.service";
+import { WithPaginationServiceParams } from "src/interfaces/query.interfaces";
 
 @Injectable()
 export class ProductService {
@@ -15,8 +15,8 @@ export class ProductService {
 
   async GetProductsWithPagination(params: WithPaginationServiceParams) {
     // check if sortby is allowed field in db
-    const allowedSortFields = ['name', 'desc', 'price', 'createdAt'];
-    if (!allowedSortFields.includes(params.sortBy)) throw new UnprocessableEntityException([{ property: '', errors: ['invalid sortBy value'] }]);
+    const allowedSortFields = ["name", "desc", "price", "createdAt"];
+    if (!allowedSortFields.includes(params.sortBy)) throw new UnprocessableEntityException([{ property: "", errors: ["invalid sortBy value"] }]);
 
     const skip = (params.page - 1) * params.pp;
 
@@ -45,7 +45,7 @@ export class ProductService {
   async GetProductReviews(id: string) {
     return await this.PrismaService.productReviews.findMany({
       where: { productId: id },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
     });
   }
 
