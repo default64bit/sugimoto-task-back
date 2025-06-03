@@ -53,6 +53,7 @@ export class ProductService {
   async CreateReviewForProduct(id: string, text: string, rating: number, usersName: string) {
     return await this.PrismaService.productReviews.create({
       data: {
+        user: usersName,
         reviewText: text,
         rating: rating,
         product: { connect: { id } },
