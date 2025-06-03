@@ -1,4 +1,5 @@
 import { Injectable, UnprocessableEntityException } from "@nestjs/common";
+import { ProductOptions, Products } from "@prisma/client";
 import { PrismaService } from "src/database/prisma.service";
 import { WithPaginationServiceParams } from "src/interfaces/query.interfaces";
 
@@ -38,7 +39,7 @@ export class ProductService {
   async GetProductById(id: string) {
     return await this.PrismaService.products.findFirst({
       where: { id },
-      include: { images: true, options: true, reviews: true },
+      include: { images: true, options: { include: { optionValues: true } }, reviews: true },
     });
   }
 

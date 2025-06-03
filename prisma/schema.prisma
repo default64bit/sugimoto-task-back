@@ -19,7 +19,7 @@ model Products {
   images  ProductImages[]
   name    String           @db.VarChar(255)
   desc    String           @db.Text
-  price   BigInt
+  price   Float
   options ProductOptions[] @relation("ProductOptions") // many-to-many
   reviews ProductReviews[]
 
@@ -40,11 +40,11 @@ model ProductImages {
 }
 
 model ProductOptions {
-  id       String                @id @default(cuid())
-  name     String                @db.VarChar(255)
-  desc     String?               @db.Text
-  options  ProductOptionValues[]
-  products Products[]            @relation("ProductOptions") // many-to-many
+  id           String                @id @default(cuid())
+  name         String                @db.VarChar(255)
+  desc         String?               @db.Text
+  optionValues ProductOptionValues[]
+  products     Products[]            @relation("ProductOptions") // many-to-many
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -54,7 +54,7 @@ model ProductOptionValues {
   id              Int     @id @default(autoincrement())
   value           String  @db.VarChar(255)
   desc            String? @db.Text
-  extraAddedPrice BigInt  @default(0)
+  extraAddedPrice Float  @default(0)
 
   productOptionsId String
   ProductOptions   ProductOptions? @relation(fields: [productOptionsId], references: [id])

@@ -20,7 +20,11 @@ export class ProductController {
       sortBy: req.query.sort?.toString() || "createdAt",
     });
 
-    return res.json({ records: results, page, total, pageTotal });
+    const records = results.map((item) => {
+      return { ...item, price: item.price.toString() };
+    });
+
+    return res.json({ records, page, total, pageTotal });
   }
 
   @Get("/:id")
@@ -28,7 +32,7 @@ export class ProductController {
     const product = await this.ProductService.GetProductById(id);
     if (!product) throw new NotFoundException();
 
-    return res.json(product);
+    return res.json({ ...product, price: product.price.toString() });
   }
 
   @Get("/:id/reviews")
