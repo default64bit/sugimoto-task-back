@@ -1,5 +1,4 @@
 import { Injectable, UnprocessableEntityException } from "@nestjs/common";
-import { ProductOptions, Products } from "@prisma/client";
 import { PrismaService } from "src/database/prisma.service";
 import { WithPaginationServiceParams } from "src/interfaces/query.interfaces";
 
