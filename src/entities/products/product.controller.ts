@@ -100,27 +100,5 @@ export class ProductController {
     }
 
     res.on("close", () => res.end());
-
-    // let content = "";
-    // const stream = new ReadableStream({
-    //   async pull(controller) {
-    //     for await (const chunk of AiResponse) {
-    //       if (!chunk) continue;
-    //       const msg = chunk.choices[0].delta.content?.toString() || "";
-    //       content += msg;
-    //       controller.enqueue(msg);
-    //     }
-    //     controller.close();
-    //   },
-    //   async cancel() {},
-    // });
-
-    // const res = new Response(stream);
-    // res.headers.append("Content-Type", "text/event-stream; charset=utf-8");
-    // res.headers.append("Connection", "keep-alive");
-    // res.headers.append("Cache-Control", "no-cache");
-    // res.headers.append("Content-Encoding", "UTF-8"); // chunk | compress | UTF-8
-    // res.headers.append("X-Accel-Buffering", "no");
-    // res.headers.append("Access-Control-Allow-Origin", "*");
   }
 }
